@@ -33,10 +33,10 @@ class LoginSerializer(serializers.Serializer):
     password = serializers.CharField(write_only=True)
 
     def validate(self, data):
-        user = authenticate(**data)  # Исправлено
+        user = authenticate(**data)
         if user and user.is_active:
             return user
-        raise serializers.ValidationError("Неверные учетные данные")  # Исправлено
+        raise serializers.ValidationError("Неверные учетные данные")
 
     def to_representation(self, instance):
         refresh = RefreshToken.for_user(instance)
